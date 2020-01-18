@@ -215,6 +215,7 @@ describe("Chan", function() {
 					"messages",
 					"totalMessages",
 					"name",
+					"previewConf",
 					"state",
 					"topic",
 					"type",

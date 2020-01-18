@@ -281,7 +281,7 @@ export default {
 			return `
 				width: ${width}px;
 				height: ${height}px;
-        ${this.blurStyle ? this.blurStyle : ''}
+        ${this.blurStyle ? this.blurStyle : ""}
 			`;
 		},
 	},

@@ -40,11 +40,11 @@ describe("Network", function() {
 				commands: [],
 				nick: "chillin`",
 				channels: [
-					{name: "#thelounge", key: ""},
-					{name: "&foobar", key: ""},
-					{name: "#secret", key: "foo"},
-					{name: "&secure", key: "bar"},
-					{name: "PrivateChat", type: "query"},
+					{name: "#thelounge", key: "", previewConf: {}},
+					{name: "&foobar", key: "", previewConf: {}},
+					{name: "#secret", key: "foo", previewConf: {}},
+					{name: "&secure", key: "bar", previewConf: {}},
+					{name: "PrivateChat", type: "query", previewConf: {}},
 				],
 				ignoreList: [],
 			});

@@ -1635,7 +1635,6 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 
 #chat .preview .unBlurOnHover:hover {
 	filter: none !important;
-	-webkit-filter: none !important;
 }
 
 #chat .userlist .count {
