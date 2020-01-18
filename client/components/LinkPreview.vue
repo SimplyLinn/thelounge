@@ -166,13 +166,13 @@ export default {
 	computed: {
 		orientation() {
 			if (!this.link) {
-				return exifOrientations[1];
+				return exifOrientations[0];
 			}
 
-			const orientation = Math.trunc(this.link.orientation - 1);
+			const orientation = Math.max(Math.trunc(this.link.orientation - 1), 0);
 
 			if (orientation >= exifOrientations.length || isNaN(orientation)) {
-				return exifOrientations[1];
+				return exifOrientations[0];
 			}
 
 			return exifOrientations[orientation];
