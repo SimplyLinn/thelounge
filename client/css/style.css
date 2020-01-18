@@ -1553,6 +1553,12 @@ textarea.input {
 	display: inline;
 }
 
+/* This applies to thumbnails of preview-type-link only */	
+#chat .toggle-content .thumb {	
+	max-height: 54px;	
+	max-width: 96px;	
+}
+
 #chat .toggle-type-error,
 #chat .toggle-content .toggle-text {
 	padding: 8px 10px;
