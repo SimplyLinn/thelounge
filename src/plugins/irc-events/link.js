@@ -5,9 +5,11 @@ const got = require("got");
 const URL = require("url").URL;
 const mime = require("mime-types");
 const Helper = require("../../helper");
+const log = require("../../log");
 const cleanIrcMessage = require("../../../client/js/helpers/ircmessageparser/cleanIrcMessage");
 const findLinks = require("../../../client/js/helpers/ircmessageparser/findLinks");
 const storage = require("../storage");
+const ExifOrientationParser = require("../exifOrientation");
 const currentFetchPromises = new Map();
 const imageTypeRegex = /^image\/.+/;
 const mediaTypeRegex = /^(audio|video)\/.+/;
@@ -263,6 +265,16 @@ function handlePreview(client, chan, msg, preview, res) {
 	const thumb = preview.thumbActualUrl || "";
 	delete preview.thumbActualUrl;
 
+	if (res && res.type === "image/jpeg") {
+		const exifParser = new ExifOrientationParser();
+
+		try {
+			preview.orientation = exifParser.parseChunk(res.data);
+		} catch (err) {
+			log.debug(err);
+		}
+	}
+
 	if (!thumb.length || !Helper.config.prefetchStorage) {
 		preview.thumb = thumb;
 		return emitPreview(client, chan, msg, preview);
@@ -349,11 +361,12 @@ function fetch(uri, headers) {
 		let contentLength = 0;
 		let contentType;
 		let limit = Helper.config.prefetchMaxImageSize * 1024;
+		const timeout = Helper.config.prefetchTimeout;
 
 		try {
 			const gotStream = got.stream(uri, {
 				retry: 0,
-				timeout: 5000,
+				timeout,
 				headers: getRequestHeaders(headers),
 				rejectUnauthorized: false,
 			});

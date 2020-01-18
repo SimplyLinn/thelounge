@@ -7,4 +7,5 @@ package-lock.json
 coverage/
 public/
 
+# EDITOR FILES
 /.vs
